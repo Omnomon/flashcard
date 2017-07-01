@@ -1,32 +1,36 @@
-function flashCard(question, answer) {
-    this.question = question
-    this.answer = answer
+function flashCard(front, back) {
+    this.front = front
+    this.back = back
+}
+
+function clozeCard(question, answer) {
     this.cloze = () => {
-        if (this.question.match(/who|what|when|where|why/gi)) {
+        if (question.match(/who|what|when|where|why/gi)) {
             let blanks = "_ _ _ _ _ _ _"
-            let cloze = this.question.replace(/who|what|when|where|why/gi, blanks)
+            let cloze = question.replace(/who|what|when|where|why/gi, blanks)
             console.log(cloze)
             return cloze
         } else {
             console.log("Cannot find pronoun!")
         }
-
     }
     this.fullText = () => {
-        if (this.question.match(/who|what|when|where|why/gi)) {
-            let fullText = this.question.replace(/who|what|when|where|why/gi, this.answer)
+        if (question.match(/who|what|when|where|why/gi)) {
+            let fullText = question.replace(/who|what|when|where|why/gi, answer)
             console.log(fullText)
             return fullText
-        } else{
+        } else {
             console.log("Cannot find pronoun!")
         }
-
     }
 }
 
 var card1 = new flashCard("who was the first president of the united states", "george washington")
-var card2 = new flashCard("This shouldn't work", "oops")
-card1.cloze()
-card1.fullText()
+var cloze1 = new clozeCard("who was the first president of the united states", "george washington")
+var card2 = new clozeCard("This shouldn't work", "oops")
+console.log(card1.front)
+console.log(card1.back)
+cloze1.cloze()
+cloze1.fullText()
 card2.cloze()
 card2.fullText()
